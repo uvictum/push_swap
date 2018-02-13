@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 14:12:04 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/13 14:56:01 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/13 19:18:30 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 		write(1, "KO\n", 3);
 	free(b->num);
 	free(b);
-	system("leaks checker");
+//	system("leaks checker");
 	return (0);
 }
 

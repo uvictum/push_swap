@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:12:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/13 18:46:18 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/13 19:08:59 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	ft_qsort(t_stack *a, t_stack *b, char arg, t_list **cmnd)
 			else
 				ft_rotate_stack(a, b, 1, cmnd);
 		}
+		if (a->index - a->srt_i > 3)
+		{
+			ft_push(a, b, 1, cmnd);
+			ft_qsort(a, b, 'a', cmnd); 
+		}
 		if (a->index - a->srt_i <= 3 && a->index - a->srt_i > 1) ///  плохое условие выхода!!
 		{
 			ft_sort_small(a, b, 'a', cmnd);
@@ -45,6 +50,11 @@ void	ft_qsort(t_stack *a, t_stack *b, char arg, t_list **cmnd)
 				ft_push(a, b, 0, cmnd);
 			else
 				ft_rotate_stack(a, b, 2, cmnd);
+		}
+		if (b->index - b->srt_i > 3)
+		{
+			ft_push(a, b, 0, cmnd);
+			ft_qsort(a, b, 'b', cmnd); 
 		}
 		if (b->index - b->srt_i <= 3 && b->index - b->srt_i > 1)
 		{
