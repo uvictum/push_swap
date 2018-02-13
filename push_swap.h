@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 14:37:05 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/12 18:21:41 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/13 16:15:41 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,16 @@ void		ft_rot_d(t_stack *stack);
 void		ft_rotate_stack(t_stack *stack_a, t_stack *stack_b, int arg, t_list **cmnd);
 void		ft_rot_both(t_stack *stack_a, t_stack *stack_b, int arg, t_list **cmnd);
 void		ft_print_stack(t_stack *a, t_stack *b);
+
+
+void		ft_qsort(t_stack *a, t_stack *b, char arg, t_list **cmnd);
+int			ft_check_lower_nums(t_stack *a, int pivot, char stack);
+int			ft_get_pivot(t_stack *stack);
+void		ft_sort_small(t_stack *a, t_stack *b, char arg, t_list **cmnd);
+void		ft_sort_two(t_stack *a, t_stack *b, char arg, t_list **cmnd);
+void		ft_print_commands(t_stack *a, t_stack *b, t_list *cmnd);
+void		ft_back_b(t_stack *a, t_stack *b, t_list **cmnd);
+int			ft_check_bsort(t_stack *b, int n);
+
 
 #endif

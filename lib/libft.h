@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 13:47:25 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/12 19:25:48 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/13 15:45:28 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define TRUE 1
 # define FALSE 0
 # define BUFF_SIZE 2048
-# define ABS(x) (x >= 0 ? x : -x)
+# define ABS(x) ((x) >= 0 ? (x) : -(x))
 
 # include <stdlib.h>
 # include <unistd.h>

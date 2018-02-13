@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 14:12:04 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/12 19:25:55 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/13 14:56:01 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+
 void	ft_operate(t_stack *a, t_stack *b, t_funcs *funcs, int flag)
 {
 	int		i;
@@ -84,43 +85,6 @@ void	ft_operate(t_stack *a, t_stack *b, t_funcs *funcs, int flag)
 	}
 	ft_lstdel(&cmnd, &ft_dellst);
 	return(ft_strdel(&instr));
-}
-
-t_stack		*ft_read_stack_a(int argc, char **argv, int flag)
-{
-	int i;
-	t_stack	*a;
-
-	i = argc - 1 - flag;
-	a = (t_stack *)ft_memalloc(sizeof(t_stack));
-	a->num = (int *)ft_memalloc(sizeof(int) * (i));
-	while (i > 0)
-	{
-		a->num[i - 1] = ft_atoi(argv[argc - i]);
-		a->index++;
-		if (a->num[i - 1] == 0 && argv[argc - i][0] != '0')
-		{
-			write(2, "Error\n", 6);
-			free(a->num);
-			free(a);
-			exit(-1);
-		}
-		i--;
-	}
-	return (a);
-}
-
-int			ft_check_sort(t_stack *a, int n)
-{
-	
-	while (n < a->index - 1)
-	{
-		if (a->num[n] > a->num[n + 1])
-			n++;
-		else 
-			return (0);
-	}
-	return (1);
 }
 
 void 	ft_print_stack(t_stack *a, t_stack *b)
