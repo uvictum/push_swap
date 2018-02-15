@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 13:39:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/13 19:04:10 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/15 20:49:25 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,20 @@
 
 void		ft_print_commands(t_stack *a, t_stack *b, t_list *cmnd)
 {
-	//if (ft_check_sort(a, a->srt_i) && b->index == 0)
-//	{
+//	if (ft_check_sort(a, a->srt_i) && b->index == 0)
+	{
 		while (cmnd)
 		{
 			write(1, cmnd->content, cmnd->content_size);
 			cmnd = cmnd->next;
 		}
-//	}
+	}
 //	else 
+//	{
+//		b->srt_i = 0;
+//		ft_qsort(a, b, 'a', &cmnd);
+//		ft_print_commands(a, b, cmnd);
+//	}
 //		ft_printf("need to check algo again\n");
 	ft_lstdel(&cmnd, &ft_dellst);
 	free(a->num);

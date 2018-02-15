@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:13:21 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/13 18:34:01 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:50:05 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ int		ft_check_bsort(t_stack *b, int n)
 	return (1);
 }
 
-int		ft_check_lower_nums(t_stack *a, int pivot, char stack)
+int		ft_check_lower_nums(t_stack *a, int pivot, char stack, int flag)
 {
 	int		i;
 
 	i = a->srt_i;
 	if (stack == 'a')
 	{
-		while(i < a->index - 1)
+		while(i < a->index - flag)
 		{
 			if (a->num[i] < pivot)
 				return (0);
@@ -88,7 +88,7 @@ int		ft_check_lower_nums(t_stack *a, int pivot, char stack)
 		return(1);
 	}
 	else
-		while (i < a->index - 1)
+		while (i < a->index - flag)
 		{
 			if (a->num[i] > pivot)
 			   return (0);
