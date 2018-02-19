@@ -87,31 +87,4 @@ void	ft_operate(t_stack *a, t_stack *b, t_funcs *funcs, int flag)
 	return(ft_strdel(&instr));
 }
 
-void 	ft_print_stack(t_stack *a, t_stack *b)
-{
-	int 	i;
-	int		j;
 
-	i = a->index - 1;
-	j = b->index - 1;
-	while (i >= 0 || j >= 0)
-	{
-		if (j == i && i >= 0)
-		{
-			printf("[%d]  [%d]\n", a->num[i], b->num[j]);
-			j--;
-			i--;
-		}
-		else if (j >= 0 && j > i)
-		{
-			printf("[ ]  [%d]\n", b->num[j]);
-			j--;
-		}
-		else if (i >= 0 && i > j) 
-		{
-			printf("[%d]  [ ]\n", a->num[i]);
-			i--;
-		}
-	}
-	printf("________\n A    B \n");
-}

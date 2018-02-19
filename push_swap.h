@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 14:37:05 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/15 17:50:26 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/16 19:41:06 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,9 @@ void		ft_back_b(t_stack *a, t_stack *b, t_list **cmnd);
 int			ft_check_bsort(t_stack *b, int n);
 t_stack		*ft_copy_stack(t_stack *a);
 void		ft_last_srtd(t_stack *a, t_stack *b);
+void		ft_simple_sort(t_stack *a, t_stack *b, char arg, t_list **cmnd);
+void		ft_nsort(t_stack *a, t_stack *b, t_list **cmnd);
+void		ft_qsort_a(t_stack *a, t_stack *b, t_list **cmnd);
+void		ft_qsort_b(t_stack *a, t_stack *b, t_list **cmnd);
 
 #endif

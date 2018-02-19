@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:13:21 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/15 17:50:05 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/16 19:02:50 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_check_lower_nums(t_stack *a, int pivot, char stack, int flag)
 	i = a->srt_i;
 	if (stack == 'a')
 	{
-		while(i < a->index - flag)
+		while(i < a->index + flag)
 		{
 			if (a->num[i] < pivot)
 				return (0);
@@ -88,7 +88,7 @@ int		ft_check_lower_nums(t_stack *a, int pivot, char stack, int flag)
 		return(1);
 	}
 	else
-		while (i < a->index - flag)
+		while (i < a->index + flag)
 		{
 			if (a->num[i] > pivot)
 			   return (0);
@@ -97,5 +97,34 @@ int		ft_check_lower_nums(t_stack *a, int pivot, char stack, int flag)
 		return (1);
 
 // убрать отсюда стак а стак б проверять только меньшие цифры, в разных стаках важен разный ответ
+}
+
+void 	ft_print_stack(t_stack *a, t_stack *b)
+{
+	int 	i;
+	int		j;
+
+	i = a->index - 1;
+	j = b->index - 1;
+	while (i >= 0 || j >= 0)
+	{
+		if (j == i && i >= 0)
+		{
+			printf("[%d]  [%d]\n", a->num[i], b->num[j]);
+			j--;
+			i--;
+		}
+		else if (j >= 0 && j > i)
+		{
+			printf("[ ]  [%d]\n", b->num[j]);
+			j--;
+		}
+		else if (i >= 0 && i > j) 
+		{
+			printf("[%d]  [ ]\n", a->num[i]);
+			i--;
+		}
+	}
+	printf("________\n A    B \n");
 }
 

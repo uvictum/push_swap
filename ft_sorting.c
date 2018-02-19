@@ -6,143 +6,103 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:12:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/15 20:39:34 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/19 18:34:21 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_qsort(t_stack *a, t_stack *b, char arg, t_list **cmnd)
-{
-	int		pivot;
-	
-	ft_last_srtd(a, b);
-	if (arg == 'a')
-	{
-		pivot = ft_get_pivot(ft_copy_stack(a));
-		//printf("pivot[%c] = %d\n", arg, pivot);
-		while (!(a->num[a->index - 1] == pivot && ft_check_lower_nums(a, pivot, 'a', 1))
-				&& a->index > 3 + a->srt_i)
-		{
-			if (a->num[a->index - 1] < pivot)
-				ft_push(a, b, 1, cmnd);
-			else
-				ft_rotate_stack(a, b, 1, cmnd);
-		}
-		if (a->index - a->srt_i > 3)
-		{
-			ft_push(a, b, 1, cmnd);
-			ft_qsort(a, b, 'a', cmnd); 
-		}
-		if (a->index - a->srt_i <= 3 && a->index - a->srt_i > 1) ///  плохое условие выхода!!
-		{
-			ft_sort_small(a, b, 'a', cmnd);
-			ft_qsort(a, b, 'b', cmnd); 
-		}
-		else
-			return ;	
-	}
-	else
-	{
-		pivot = ft_get_pivot(ft_copy_stack(b));
-	//	printf("pivot[%c] = %d\n", arg, pivot);
-		while (!(b->num[b->index - 1] == pivot && ft_check_lower_nums(b, pivot, 'b', 1))
-				&& b->index > 3 + b->srt_i)
-		{
-			if (b->num[b->index - 1] > pivot)
-				ft_push(a, b, 0, cmnd);
-			else
-				ft_rotate_stack(a, b, 2, cmnd);
-		}
-		if (b->index - b->srt_i > 3)
-		{
-			ft_push(a, b, 0, cmnd);
-			ft_qsort(a, b, 'b', cmnd); 
-		}
-		if (b->index - b->srt_i <= 3 && b->index - b->srt_i > 1)
-		{
-			ft_sort_small(a, b, 'b', cmnd);
-			ft_qsort(a, b, 'a', cmnd); 
-		}
-		else
-			return ;	
-	}
-}
-
-
 void	ft_sort_small(t_stack *a, t_stack *b, char arg, t_list **cmnd)
 {
-		if (arg == 'a')
-		{	
-			if (ft_check_sort(a, a->srt_i - 1))
+	if (arg == 'a')
+	{	
+		if (ft_check_sort(a, a->srt_i - 1) && (a->index - (a->srt_i + (a->srt_i > 0 ? 1 : 0)) > 1 || (a->srt_i == a->index - 1)))
+		{
+			ft_last_srtd(a, b);
+			return ;
+		}	
+		if	(a->index - (a->srt_i + (a->srt_i > 0 ? 1 : 0)) > 2)
+		{
+			if (MAX(a->num[a->index - 1], a->num[a->index - 2], a->num[a->index - 3]))
 			{
-				a->srt_i += 3;
-				return ;
-			}	
-			if	(a->index - a->srt_i > 2)
-			{
-				if (MAX(a->num[a->index - 1], a->num[a->index - 2], a->num[a->index - 3]))
-				{
+				if (a->srt_i == 0)
+				{	
 					ft_rotate_stack(a, b, 1, cmnd);
 					ft_sort_two(a, b, arg, cmnd);
-					a->srt_i += 3;
-				}
-				else if (MIN(a->num[a->index - 1], a->num[a->index - 2], a->num[a->index - 3]))
-				{
-					ft_push(a, b, 1, cmnd);
-					ft_sort_two(a, b, arg, cmnd);
-					ft_push(a, b, 0, cmnd);
-					a->srt_i += 3;
 				}
 				else
-				{
-					ft_swp(a, b, 0, cmnd);
-					ft_sort_small(a, b, arg, cmnd);
-				}
+					ft_simple_sort(a, b, arg, cmnd);
 			}
-			else if (a->index - a->srt_i > 1)
+			else if (MIN(a->num[a->index - 1], a->num[a->index - 2], a->num[a->index - 3]))
 			{
+				ft_push(a, b, 1, cmnd);
 				ft_sort_two(a, b, arg, cmnd);
-				a->srt_i += 2;
+				ft_push(a, b, 0, cmnd);
+				ft_last_srtd(a, b);
 			}
 			else
-				return ;
+			{
+				ft_swp(a, b, 0, cmnd);
+				ft_sort_small(a, b, arg, cmnd);
+			}
+			ft_last_srtd(a, b);
 		}
-		else 
-		{	
-			if (ft_check_bsort(b, b->srt_i - 1))
+		else if (a->index - (a->srt_i + (a->srt_i > 0 ? 1 : 0)) > 1)
+		{
+			ft_sort_two(a, b, arg, cmnd);
+			ft_last_srtd(a, b);
+		}
+		else
+		{
+			ft_push(a, b, 1, cmnd);
+			ft_last_srtd(a, b);
+			return ;
+		}
+	}
+	else 
+	{	
+		if (ft_check_bsort(b, b->srt_i - 1) && (b->index - (b->srt_i + (b->srt_i > 0 ? 1 : 0)) > 1 || (b->srt_i == b->index - 1)))
+		{
+			ft_last_srtd(a, b);
+			return ;
+		}	
+		if	(b->index - (b->srt_i + (b->srt_i > 0 ? 1 : 0)) > 2) 
+		{
+			if (MAX(b->num[b->index - 1], b->num[b->index - 2], b->num[b->index - 3]))
 			{
-				b->srt_i += 3;
-				return ;
-			}	
-			if	(b->index - b->srt_i > 2) 
+				ft_push(a, b, 0, cmnd);
+				ft_sort_two(a, b, arg, cmnd);
+				ft_last_srtd(a, b);
+			}
+			else if (MIN(b->num[b->index - 1], b->num[b->index - 2], b->num[b->index - 3]))
 			{
-				if (MAX(b->num[b->index - 1], b->num[b->index - 2], b->num[b->index - 3]))
-				{
-					ft_push(a, b, 0, cmnd);
-					ft_sort_two(a, b, arg, cmnd);
-					b->srt_i += 3;
-				}
-				else if (MIN(b->num[b->index - 1], b->num[b->index - 2], b->num[b->index - 3]))
+				if (b->srt_i == 0)
 				{
 					ft_rotate_stack(a, b, 2, cmnd);
 					ft_sort_two(a, b, arg, cmnd);
-					b->srt_i += 3;
 				}
 				else
-				{
-					ft_swp(a, b, 1, cmnd);
-					ft_sort_small(a, b, arg, cmnd);
-				}
-			}
-			else if (b->index - b->srt_i > 1 && !ft_check_bsort(b, b->srt_i - 1))
-			{
-				ft_sort_two(a, b, arg, cmnd);
-				b->srt_i += 2;	
+					ft_simple_sort(a, b, arg, cmnd);
+				ft_last_srtd(a, b);
 			}
 			else
-				return;
+			{
+				ft_swp(a, b, 1, cmnd);
+				ft_sort_small(a, b, arg, cmnd);
+			}
 		}
+		else if (b->index - (b->srt_i + (b->srt_i > 0 ? 1 : 0)) > 1 && !ft_check_bsort(b, b->srt_i - 1))
+		{
+			ft_sort_two(a, b, arg, cmnd);
+			ft_last_srtd(a, b);
+		}
+		else if (b->index - (b->srt_i + (b->srt_i > 0 ? 1 : 0)) == 1)
+		{
+			ft_push(a, b, 0, cmnd);
+			ft_last_srtd(a, b);
+			return;
+		}
+	}
 }
 
 void	ft_sort_two(t_stack *a, t_stack *b, char arg, t_list **cmnd)
@@ -170,7 +130,7 @@ int		ft_get_pivot(t_stack *a)
 	int			s;
 
 	s = 0;
-	while (s < a->index)
+	while (s < a->index - a->srt_i)
 	{	
 		i = a->srt_i;
 		while (i < a->index - 1 - s)
@@ -185,7 +145,7 @@ int		ft_get_pivot(t_stack *a)
 		}
 		s++;
 	}
-	i = a->num[a->index/2];
+	i = a->num[a->srt_i + ((a->index - a->srt_i)/2)];
 	free(a->num);
 	free(a);
 	return (i);
@@ -195,18 +155,16 @@ t_stack		*ft_copy_stack(t_stack *a)
 {
 	t_stack *stack;
 	int		i;
-	int		j;
 
-	j = 0;
-	i = a->srt_i;
+	i = 0;
 	stack = (t_stack *)ft_memalloc(sizeof(t_stack));
-	stack->index = a->index - a->srt_i;
+	stack->index = a->index;
+	stack->srt_i = a->srt_i;
 	stack->num = (int *)ft_memalloc(sizeof(int) * stack->index);
-	while (i < a->index && j < stack->index)
+	while (i < a->index)
 	{
-		stack->num[j] = a->num[i];
+		stack->num[i] = a->num[i];
 		i++;
-		j++;
 	}	
 	return(stack);
 }
@@ -215,30 +173,34 @@ void		ft_last_srtd(t_stack *a, t_stack *b)
 {
 	int		i;
 
-	i = a->srt_i;
+	i = 0;
+	a->srt_i = 0;
 	while (i < a->index - 1)
 	{
 		if (a->num[i] > a->num[i + 1])
 		{
 			a->srt_i++;
-			if (ft_check_lower_nums(a, a->num[i + 1], 'b', 0))
+			if (ft_check_lower_nums(a, a->num[i + 1], 'b', 0) && 
+				ft_check_lower_nums(b, a->num[i + 1], 'b', 0))
 				i++;
 			else
 			{
 				a->srt_i--;
-				return ;
+				break ;
 			}
 		}
 		else
-			return ;
+			break ;
 	}
-	i = b->srt_i;
+	i = 0;
+	b->srt_i = 0;
 	while(i < b->index - 1)
 	{
 		if (b->num[i] < b->num[i + 1])
 		{
 			b->srt_i++;
-			if (ft_check_lower_nums(b, b->num[i + i], 'a', 0))
+			if (ft_check_lower_nums(b, b->num[i + 1], 'a', 0) && 
+				ft_check_lower_nums(a, b->num[i + 1], 'a', 0))
 				i++;
 			else
 			{
@@ -251,4 +213,35 @@ void		ft_last_srtd(t_stack *a, t_stack *b)
 	}
 }
 
-	
+
+void		ft_simple_sort(t_stack *a, t_stack *b, char arg, t_list **cmnd)
+{
+	int		j;
+
+	ft_last_srtd(a, b);
+	if (arg == 'a')
+	{
+		j = b->index;
+		while (a->index - 1 > a->srt_i)
+		{
+			if (j < b->index - 1 && b->num[b->index - 1] < b->num[b->index - 2])
+				ft_swp(a, b, 1, cmnd);
+			ft_push(a, b, 1, cmnd);
+		}
+		while (j < b->index)
+			ft_push(a, b, 0, cmnd);
+	}	
+	else
+	{
+		j = a->index;
+		while (b->index - 1 > b->srt_i)
+		{
+			if (j < a->index - 1 && a->num[a->index - 1] > a->num[a->index - 2]) 
+				ft_swp(a, b, 0, cmnd);
+			ft_push(a, b, 0, cmnd);
+		}
+		while (j < a->index)
+			ft_push(a, b, 1, cmnd);
+	}
+}
+
