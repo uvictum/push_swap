@@ -6,11 +6,43 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:03:02 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/19 18:36:07 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:39:47 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void		ft_qsort_bi(t_stack *a, t_stack *b, t_list **cmnd)
+{
+	int		i;
+	int		n;
+
+	i = 0;
+	n = b->index - (b->index / 2);
+	//n = b->index - (a->index * a->index/3);
+	while (b->index > n)
+	{
+		if (ft_check_lower_nums(b, b->num[b->index - 1], 'b', 0))
+		{
+			ft_push(a, b, 0, cmnd);
+			while (i > 0 && !ft_check_lower_nums(b, b->num[b->index - 1], 'b', 0))
+			{
+				ft_rotate_stack(a, b, -2, cmnd);
+				i--;
+			}
+		}
+		else
+		{
+			while (!ft_check_lower_nums(b, b->num[b->index - 1], 'b', 0))
+			{
+				ft_rotate_stack(a, b, 2, cmnd);
+				i++;
+			}
+		}
+	}
+	ft_last_srtd(a, b);
+	ft_qsort_b(a, b, cmnd);
+}
 
 void	ft_nsort(t_stack *a, t_stack *b, t_list **cmnd)
 {
@@ -20,9 +52,10 @@ void	ft_nsort(t_stack *a, t_stack *b, t_list **cmnd)
 		while (a->index - a->srt_i > 3)
 			ft_qsort_a(a, b, cmnd);
 		ft_sort_small(a, b ,'a', cmnd);
-		while (b->index - (b->srt_i + (b->srt_i > 0 ? 1 : 0)) > 3 && b->index > 0)
-			ft_qsort_b(a, b, cmnd);
-		ft_sort_small(a, b, 'b', cmnd);
+	//	while (b->index - (b->srt_i + (b->srt_i > 0 ? 1 : 0)) > 3 && b->index > 0)
+	//		ft_qsort_b(a, b, cmnd);
+	//	ft_sort_small(a, b, 'b', cmnd);
+		ft_qsort_bi(a, b, cmnd);
 		//ft_print_stack(a, b);
 	}
 }
@@ -34,11 +67,15 @@ void	ft_qsort_a(t_stack *a, t_stack *b, t_list **cmnd)
 
 	i = 0;
 	pivot = ft_get_pivot(ft_copy_stack(a));
-	while (!ft_check_lower_nums(a, pivot, 'a', 0) 
-			&& a->index > 3 + a->srt_i)
+	while (!ft_check_lower_nums(a, pivot, 'a', 0))
+		//	&& a->index > 3 + a->srt_i)
 	{	
-		if (a->num[a->index - 1] < pivot)
+		if (a->num[a->index - 1] <= pivot)
+		{
+	//		ft_sort_two(a, b, 'a', cmnd);
 			ft_push(a, b, 1, cmnd);
+			ft_sort_two(a, b, 'b', cmnd);
+		}
 		else
 		{
 			ft_rotate_stack(a, b, 1, cmnd);
@@ -61,11 +98,15 @@ void	ft_qsort_b(t_stack *a, t_stack *b, t_list **cmnd)
 
 	i = 0;
 	pivot = ft_get_pivot(ft_copy_stack(b));
-	while (!ft_check_lower_nums(b, pivot, 'b', 0) 
-			&& b->index > 3 + b->srt_i)
+	while (!ft_check_lower_nums(b, pivot, 'b', 0)) 
+			//&& b->index > 3 + b->srt_i)
 	{	
-		if (b->num[b->index - 1] > pivot)
+		if (b->num[b->index - 1] >= pivot)
+		{
+			ft_sort_two(a, b, 'b', cmnd);
 			ft_push(a, b, 0, cmnd);
+//		ft_sort_two(a, b, 'a', cmnd);
+		}
 		else
 		{
 			ft_rotate_stack(a, b, 2, cmnd);
@@ -73,10 +114,12 @@ void	ft_qsort_b(t_stack *a, t_stack *b, t_list **cmnd)
 				i++;
 		}
 	}
-	while (i > 0)
-	{
-		ft_rotate_stack(a, b, -2, cmnd);
-		i--;
-	}
-	ft_last_srtd(a, b);
+//	while (i > 0)
+//	{
+//		ft_rotate_stack(a, b, -2, cmnd);
+//		i--;
+//	}
 }
+
+
+
