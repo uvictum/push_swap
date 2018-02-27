@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:13:21 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/16 19:02:50 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:24:04 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int			ft_check_sort(t_stack *a, int n)
 
 
 
-void	ft_back_b(t_stack *a, t_stack *b, t_list **cmnd)
+void	ft_back_b(t_stack *a, t_stack *b, int n, t_list **cmnd)
 {
-	while (b->index > 0)
+	while (b->index > n)
 		ft_push(a, b, 0, cmnd);
 }
 	
@@ -95,9 +95,8 @@ int		ft_check_lower_nums(t_stack *a, int pivot, char stack, int flag)
 			i++;
 		}	
 		return (1);
-
-// убрать отсюда стак а стак б проверять только меньшие цифры, в разных стаках важен разный ответ
 }
+// убрать отсюда стак а стак б проверять только меньшие цифры, в разных стаках важен разный ответ
 
 void 	ft_print_stack(t_stack *a, t_stack *b)
 {
