@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:12:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/27 19:30:39 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/28 15:38:43 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,55 +19,33 @@ void	ft_sort_small(t_stack *a, t_stack *b, char arg, t_list **cmnd)
 		if (ft_check_sort(a, a->srt_i)
 			&& ((a->index - a->srt_i > 1) || (a->srt_i == a->index)))
 				return ;
-	
-/*void ft_sort3a(t_stack *a, t_stack *b, cmnd);
-{
-	av = get_avrg(a);
-	while (a->index - a->srt_i > 2)
-	{
-		if (a->num[a->index - 1] >= av)
-		{
-			ft_rotate_stack(a, b, 1, cmnd);
-			if (a->srt_i > 0)
-				i++;
-		}
-		else
-			ft_push(a, b, 0, cmnd);
-		while (i > 0)
-		{
-			ft_rotate_stack(a, b, -1, cmnd);
-			i--;
-		}
-	}
-	ft_sort_two(a, b, 'a', cmnd);
-}*/
-
-
 		if	(a->index - a->srt_i > 2)
 		{
 			if (MAX(a->num[a->index - 1], a->num[a->index - 2], a->num[a->index - 3]))
 			{
-				ft_rotate_stack(a, b, 1, cmnd);
+				if (a->srt_i == 0)
+					ft_rotate_stack(a, b, 1, cmnd);
+				else
+				{
+					ft_swp(a, b, 0, cmnd);
+					ft_push(a, b, 1, cmnd);
+				}
 				ft_sort_two(a, b, arg, cmnd);
-				ft_push(a, b, 1, cmnd);
 				if (a->srt_i > 0)
 				{
-					ft_rotate_stack(a, b, -1, cmnd);
+					ft_push(a, b, 0, cmnd);
 					ft_sort_two(a, b, arg, cmnd);
 				}
-				ft_push(a, b, 0, cmnd);
 			}
-			else if (MIN(a->num[a->index - 1], a->num[a->index - 2], a->num[a->index - 3]))
+			else if (MAX(a->num[a->index - 2], a->num[a->index - 1], a->num[a->index - 3]))
 			{
 				ft_rotate_stack(a, b, 1, cmnd);
 				ft_sort_two(a, b, arg, cmnd);
 				ft_rotate_stack(a, b, -1, cmnd);
+				ft_sort_two(a, b, arg, cmnd);
 			}
 			else
-			{
 				ft_swp(a, b, 0, cmnd);
-				ft_sort_small(a, b, arg, cmnd);
-			}
 		}
 		else if (a->index - a->srt_i > 1)
 			ft_sort_two(a, b, arg, cmnd);
@@ -79,9 +57,6 @@ void	ft_sort_small(t_stack *a, t_stack *b, char arg, t_list **cmnd)
 		if (ft_check_bsort(b, b->srt_i) && ((b->index - b->srt_i > 1) 
 			|| (b->srt_i == b->index)))
 			return ;
-	//	ft_sort3b(a, b, cmnd);
-
-
 
 		if	(b->index - b->srt_i > 2) 
 		{
@@ -175,34 +150,3 @@ t_stack		*ft_copy_stack(t_stack *a)
 	}	
 	return(stack);
 }
-
-void		ft_simple_sort(t_stack *a, t_stack *b, char arg, t_list **cmnd)
-{
-	int		j;
-
-	if (arg == 'a')
-	{
-		j = b->index;
-		while (a->index  > a->srt_i)
-		{
-			ft_push(a, b, 1, cmnd);
-			if (j < b->index - 1 && b->num[b->index - 1] < b->num[b->index - 2])
-				ft_swp(a, b, 1, cmnd);
-		}
-		while (j < b->index)
-			ft_push(a, b, 0, cmnd);
-	}	
-	else
-	{
-		j = a->index;
-		while (b->index > b->srt_i)
-		{
-			ft_push(a, b, 0, cmnd);
-			if (j < a->index - 1 && a->num[a->index - 1] > a->num[a->index - 2]) 
-				ft_swp(a, b, 0, cmnd);
-		}
-		while (j < a->index)
-			ft_push(a, b, 1, cmnd);
-	}
-}
-

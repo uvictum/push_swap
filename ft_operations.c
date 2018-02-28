@@ -6,14 +6,13 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 16:34:43 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/15 18:24:29 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/28 19:47:33 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-void 	ft_swap_t(t_stack *stack, size_t index_f, size_t index_s)
+void	ft_swap_t(t_stack *stack, size_t index_f, size_t index_s)
 {
 	int		buf;
 
@@ -35,6 +34,7 @@ void	ft_swp(t_stack *stack_a, t_stack *stack_b, int arg, t_list **cmnd)
 		*cmnd = ft_lstadd_end(*cmnd, ft_lstnew("sb\n", 3));
 	}
 }
+
 void	ft_push(t_stack *stack_a, t_stack *stack_b, int arg, t_list **cmnd)
 {
 	if (!arg && stack_b->index > 0)
@@ -70,7 +70,7 @@ void	ft_rot_u(t_stack *stack)
 void	ft_rot_d(t_stack *stack)
 {
 	int		i;
-	
+
 	i = 0;
 	while (i < stack->index - 1)
 	{
@@ -79,7 +79,8 @@ void	ft_rot_d(t_stack *stack)
 	}
 }
 
-void	ft_rotate_stack(t_stack *stack_a, t_stack *stack_b, int arg, t_list **cmnd)
+void	ft_rotate_stack(t_stack *stack_a, t_stack *stack_b,
+		int arg, t_list **cmnd)
 {
 	if (arg == 1 && stack_a->index > 1)
 	{
@@ -105,7 +106,7 @@ void	ft_rotate_stack(t_stack *stack_a, t_stack *stack_b, int arg, t_list **cmnd)
 
 void	ft_rot_both(t_stack *stack_a, t_stack *stack_b, int arg, t_list **cmnd)
 {
-	if (arg)
+	if (!arg)
 	{
 		ft_rotate_stack(stack_a, stack_b, 1, cmnd);
 		ft_rotate_stack(stack_a, stack_b, 2, cmnd);
