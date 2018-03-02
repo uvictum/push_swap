@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/10 13:03:35 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/28 19:22:32 by vmorguno         ###   ########.fr       */
+/*   Created: 2018/03/02 12:23:04 by vmorguno          #+#    #+#             */
+/*   Updated: 2018/03/02 12:23:06 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	t_stack 	*a;
+	t_stack		*a;
 	t_stack		*b;
 	t_list		*cmnd;
 	int			pivot;
@@ -28,7 +28,3 @@ int		main(int argc, char **argv)
 	ft_print_commands(a, b, cmnd);
 	return (0);
 }
-
-
-
-

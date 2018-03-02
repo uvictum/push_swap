@@ -6,13 +6,13 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:00:57 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/28 19:51:55 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:48:48 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			ft_check_ops(char *current, char *next)
+int				ft_check_ops(char *current, char *next)
 {
 	if ((!ft_strcmp(current, "rrb\n") && !ft_strcmp(next, "rb\n")) ||
 		(!ft_strcmp(current, "rra\n") && !ft_strcmp(next, "ra\n")) ||
@@ -34,11 +34,29 @@ int			ft_check_ops(char *current, char *next)
 		return (0);
 }
 
-int			ft_cmnd_optimizer(t_list *cmnd)
+static int		ft_shortcmnds(t_list *cmnd)
 {
-	int		i;
-	t_list	*buf;
-	char	*str;
+	t_list		*buf;
+	char		*str;
+
+	buf = cmnd->next->next;
+	ft_lstdelone(&cmnd->next, &ft_dellst);
+	cmnd->next = buf;
+	str = (char *)cmnd->next->content;
+	if (str[0] == 's')
+		str[1] = 's';
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] != '\n')
+		str[2] = 'r';
+	else
+		str[1] = 'r';
+	return (1);
+}
+
+int				ft_cmnd_optimizer(t_list *cmnd)
+{
+	int			i;
+	t_list		*buf;
+	char		*str;
 
 	i = 0;
 	while (cmnd && cmnd->next && cmnd->next->next)
@@ -53,30 +71,17 @@ int			ft_cmnd_optimizer(t_list *cmnd)
 		}
 		else if (ft_check_ops(cmnd->next->content,
 		cmnd->next->next->content) == 2)
-		{
-			buf = cmnd->next->next;
-			ft_lstdelone(&cmnd->next, &ft_dellst);
-			cmnd->next = buf;
-			str = (char *)cmnd->next->content;
-			if (str[0] == 's')
-				str[1] = 's';
-			else if (str[0] == 'r' && str[1] == 'r'
-					&& str[2] != '\n')
-				str[2] = 'r';
-			else
-				str[1] = 'r';
-			i = 1;
-		}
+			i = ft_shortcmnds(cmnd);
 		cmnd = cmnd->next;
 	}
 	return (i);
 }
 
-int			ft_cmnd_short(t_list *cmnd)
+int				ft_cmnd_short(t_list *cmnd)
 {
-	int		i;
-	t_list	*buf;
-	char	*str;
+	int			i;
+	t_list		*buf;
+	char		*str;
 
 	i = 0;
 	while (cmnd && cmnd->next && cmnd->next->next && cmnd->next->next->next)
@@ -100,7 +105,7 @@ int			ft_cmnd_short(t_list *cmnd)
 	return (i);
 }
 
-void		ft_optimize_commands(t_list *cmnd)
+void			ft_optimize_commands(t_list *cmnd)
 {
 	while (ft_cmnd_optimizer(cmnd))
 		continue;

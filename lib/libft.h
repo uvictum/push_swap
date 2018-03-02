@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 13:47:25 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/02/15 18:24:16 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:54:25 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define ABS(x) ((x) >= 0 ? (x) : -(x))
 # define MAX(x, y, z) (x > y && x > z ? 1 : 0)
 # define MIN(x, y, z) (x < y && x < z ? 1 : 0)
+# define MAX_INT 2147483647
+# define MIN_INT -2147483648
 
 # include <stdlib.h>
 # include <unistd.h>
