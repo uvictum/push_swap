@@ -6,17 +6,17 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 16:39:22 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/03/02 17:11:32 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:34:04 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_atoi_simple(const char *str)
+static int		ft_atoi_simple(const char *str)
 {
-	int		sign;
-	long	res;
-	char	*buf;
+	int			sign;
+	long int	res;
+	char		*buf;
 
 	buf = (char *)str;
 	res = 0;
@@ -34,7 +34,7 @@ static int	ft_atoi_simple(const char *str)
 	return ((int)(res * sign));
 }
 
-void		ft_del_stack(t_stack *stack)
+void			ft_del_stack(t_stack *stack)
 {
 	if (stack)
 	{
@@ -44,10 +44,10 @@ void		ft_del_stack(t_stack *stack)
 	}
 }
 
-t_stack		*ft_read_stack_a(int argc, char **argv, int flag)
+t_stack			*ft_read_stack_a(int argc, char **argv, int flag)
 {
-	int		i;
-	t_stack	*a;
+	int			i;
+	t_stack		*a;
 
 	flag = (flag > 0 ? 1 : 0);
 	i = argc - 1 - flag;
@@ -68,10 +68,10 @@ t_stack		*ft_read_stack_a(int argc, char **argv, int flag)
 	return (a);
 }
 
-t_stack		*ft_copy_stack(t_stack *a)
+t_stack			*ft_copy_stack(t_stack *a)
 {
-	t_stack *stack;
-	int		i;
+	t_stack		*stack;
+	size_t		i;
 
 	i = 0;
 	stack = (t_stack *)ft_memalloc(sizeof(t_stack));

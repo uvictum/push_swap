@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 12:23:04 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/03/02 18:46:44 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:29:49 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int				main(int argc, char **argv)
 	t_stack		*a;
 	t_stack		*b;
 	t_list		*cmnd;
-	int			pivot;
 
 	if (argc == 1)
 	{

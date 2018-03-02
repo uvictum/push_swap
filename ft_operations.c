@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 16:34:43 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/03/02 15:38:27 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:15:07 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_rot_u(t_stack *stack)
 
 void	ft_rot_d(t_stack *stack)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (i < stack->index - 1)

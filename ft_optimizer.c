@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:00:57 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/03/02 16:48:48 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:30:27 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int				ft_cmnd_optimizer(t_list *cmnd)
 {
 	int			i;
 	t_list		*buf;
-	char		*str;
 
 	i = 0;
 	while (cmnd && cmnd->next && cmnd->next->next)

@@ -6,16 +6,14 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:13:21 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/03/02 18:29:15 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:21:49 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			ft_check_sort(t_stack *a, int n)
+int			ft_check_sort(t_stack *a, size_t n)
 {
-	if (n < 0)
-		n = 0;
 	while (n < a->index - 1)
 	{
 		if (a->num[n] > a->num[n + 1])
@@ -26,16 +24,14 @@ int			ft_check_sort(t_stack *a, int n)
 	return (1);
 }
 
-void		ft_back_b(t_stack *a, t_stack *b, int n, t_list **cmnd)
+void		ft_back_b(t_stack *a, t_stack *b, size_t n, t_list **cmnd)
 {
 	while (b->index > n)
 		ft_push(a, b, 0, cmnd);
 }
 
-int			ft_check_bsort(t_stack *b, int n)
+int			ft_check_bsort(t_stack *b, size_t n)
 {
-	if (n < 0)
-		n = 0;
 	while (n < b->index - 1)
 	{
 		if (b->num[n] < b->num[n + 1])
@@ -48,7 +44,7 @@ int			ft_check_bsort(t_stack *b, int n)
 
 int			ft_check_lower_nums(t_stack *a, int pivot, char stack, int flag)
 {
-	int		i;
+	size_t	i;
 
 	i = a->srt_i;
 	if (stack == 'a')
@@ -76,8 +72,8 @@ int			ft_check_lower_nums(t_stack *a, int pivot, char stack, int flag)
 int			ft_get_pivot(t_stack *a)
 {
 	int		buf;
-	int		i;
-	int		s;
+	size_t	i;
+	size_t	s;
 
 	s = 0;
 	while (s < a->index - a->srt_i)
