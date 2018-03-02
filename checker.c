@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 14:12:04 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/03/02 17:49:43 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:48:37 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				main(int argc, char **argv)
 	funcs = func_init();
 	if (argc <= 1)
 	{
-		write(1, "\n", 1);
+		write(1, "usage: ./push_swap | ./checker [flags -cv]\n", 43);
 		return (0);
 	}
 	flag = ft_get_flag(argv[1]);

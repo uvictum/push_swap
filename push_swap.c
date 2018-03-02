@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 12:23:04 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/03/02 12:23:06 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:46:44 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int				main(int argc, char **argv)
 	t_list		*cmnd;
 	int			pivot;
 
+	if (argc == 1)
+	{
+		write(1, "usage : ./push_swap [int] [int] ... \n", 37);
+		return (0);
+	}
 	a = ft_read_stack_a(argc, argv, 0);
 	b = (t_stack *)ft_memalloc(sizeof(t_stack));
 	b->num = (int *)ft_memalloc(sizeof(int) * argc - 1);
