@@ -26,12 +26,10 @@ OBJ2= $(addsuffix .o, $(FILES2))
 
 NAME= $(NAME1) $(NAME2)
 
-all: lib $(NAME)
-
-lib: 
-	make -C ./lib
+all: $(NAME)
 
 $(NAME1): $(OBJ) $(OBJ1)
+	make -C lib
 	$(CC) $(CFLAGS) $(OBJ) $(OBJ1) -L./lib -lft -o $@
 
 $(NAME2): $(OBJ2)
